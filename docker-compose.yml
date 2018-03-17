@@ -12,4 +12,6 @@ services:
     extends:
       service: app
     entrypoint: ["python", "manage.py"]
+    volumes:
+      - ".:/usr/src/app"
     command: []
