@@ -25,7 +25,8 @@ SECRET_KEY = '#!m37aelnb3kgna^zs@^r2y_j#rkh8*u&506$mk6pq4d1#4a+x'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['epedzich.nazarewk.pw',
+                 'epedzich.nazarewk.pw:8000']
 
 # Application definition
 
