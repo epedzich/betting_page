@@ -1,0 +1,11 @@
+version: '2'
+services:
+  app:
+    build:
+      context: .
+    restart: always
+    volumes:
+      - ../data:/data
+    ports:
+      - "8000:8000"
+
