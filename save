@@ -1,0 +1,12 @@
+import os
+import django
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Betting_page.settings")
+django.setup()
+# Najpierw te 4 linijki wyzej, nie mozna nic z modeli itp importowac przed bo w trakcie importowania probuja dostawac sie
+# do settingsow
+
+from events.models import Event
+
+with open('oh_pk.txt', 'w') as p:
+    for event in Event.objects.all():
+        p.write(f'{event.oh_pk}\n')

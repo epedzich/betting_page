@@ -1,0 +1,40 @@
+body{
+    background-color: honeydew;
+}
+
+.navbar{
+    background-color: green;
+    overflow: hidden;
+}
+
+.navbar a{
+    float: right;
+    text-decoration: none;
+    text-align: center;
+    padding: 15px;
+    color: gainsboro;
+    font-size: 1.2em;
+
+}
+
+.navbar a:hover{
+    color: white;
+}
+
+
+.category-list a{
+    text-decoration: none;
+    color: black;
+}
+
+.category-list a:hover{
+    color:orangered;
+}
+
+.tag-link{
+    text-decoration: none;
+    color: black;
+}
+.tag-link:hover{
+    color: orangered;
+}

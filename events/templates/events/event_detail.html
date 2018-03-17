@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{{ event.name }}</h1>
+    <p>Bet on this event: {{ event.inbank }} BTC</p>
+    <p>Number of bets: {{ event.bets_count }}</p>
+    <h2>Options:</h2>
+    {% for ep in event.options %}
+        {% with p=ep.participant %}
+            <p><strong>{{ p.name }}{% if ep.is_winner %} (winner){% endif %}</strong></p>
+            {% if p.image %}<p><img src="{{ p.image }}"></p>{% endif %}
+            {% if event.status == 'active' %}<a href="{% url 'betting:create' ep.pk %}">
+                <button>Bet</button>
+            </a>{% endif %}
+            <p>Bets on this option: {{ ep.bets_count }}</p>
+            <p>Bet on this option: {{ ep.inbank|default_if_none:0 }} BTC</p>
+        {% endwith %}
+    {% endfor %}
+    <br><br>
+    <p><strong>Event</strong>:
+        <a href="{% url 'events:category_detail' event.category.pk %}" class="tag-link">
+            {{ event.category.name }}</a>
+    </p>
+    <p><strong>Type</strong>:
+        {% if event.category.parent %}
+            <a href="{% url 'events:category_detail' event.category.parent.pk %}" class="tag-link">
+                {{ event.category.parent.name }}
+            </a>
+        {% endif %}
+    </p>
+    <p><strong>Activity</strong>:
+        {% if event.category.parent.parent %}
+            <a href="{% url 'events:category_detail' event.category.parent.parent.pk %}" class="tag-link">
+                {{ event.category.parent.parent.name }}</a>
+        {% endif %}
+    </p>
+
+
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Hi, {{ user.username }}!</h2>
+    <p>Your saldo is: {{ wallet.balance|default_if_none:0 }} BTC</p>
+    <br>
+    <p><strong>List of your operations:</strong></p>
+    <ul class="category-list">
+        {% for op in wallet.operations.all %}
+            <li>{{ op.change }}, {{ op.date }}, for option {{ op.bet.event_participant.participant.name }}
+                in <a href="{% url 'events:detail' pk=op.bet.event_participant.event.pk %}">
+                    {{ op.bet.event_participant.event.name }}
+                </a>
+                event {% if op.bet.event_participant.event.status != 'active' %} (finished){% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
