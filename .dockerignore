@@ -1,3 +1,5 @@
 Dockerfile
 .git*
 staticfiles/
+docker-compose.yml
+.dockerignore
