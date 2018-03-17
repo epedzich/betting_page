@@ -1,3 +1,4 @@
+uWSGI==2.0.15
 certifi==2018.1.18
 chardet==3.0.4
 Django==2.0.2
@@ -6,7 +7,6 @@ django-filter==1.1.0
 django-js-asset==1.0.0
 django-mptt==0.9.0
 djangorestframework==3.7.7
-gunicorn==19.7.1
 idna==2.6
 Markdown==2.6.11
 ordering==0.1.0

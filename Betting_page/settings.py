@@ -23,10 +23,16 @@ TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 SECRET_KEY = '#!m37aelnb3kgna^zs@^r2y_j#rkh8*u&506$mk6pq4d1#4a+x'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = bool(os.environ.get('DEBUG', True))
 
-ALLOWED_HOSTS = ['epedzich.nazarewk.pw',
-                 'epedzich.nazarewk.pw:8000']
+ALLOWED_HOSTS = [
+    'localhost',
+    'localhost:8000',
+    '127.0.0.1',
+    '127.0.0.1:8000',
+    'epedzich.nazarewk.pw',
+    'epedzich.nazarewk.pw:8000',
+]
 
 # Application definition
 
@@ -82,7 +88,7 @@ WSGI_APPLICATION = 'Betting_page.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': os.environ.get('DATABASE', os.path.join(BASE_DIR, 'db.sqlite3')),
         'ATOMIC_REQUESTS': True,
     }
 }
@@ -122,7 +128,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.environ.get('STATIC_ROOT', os.path.join(BASE_DIR, 'staticfiles'))
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 LOGIN_REDIRECT_URL = 'events:list'
