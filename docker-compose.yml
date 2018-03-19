@@ -1,17 +1,22 @@
 version: '2'
 services:
-  app:
+  base:
     build:
       context: .
-    restart: always
     volumes:
       - ../data:/data
+    command: ["exit"]
+  app:
+    extends:
+      service: base
+    restart: always
     ports:
       - "8000:8000"
+    command: ["uwsgi", "--http", ":8000", "--module", "Betting_page.wsgi", "--static-map", "/static=/usr/src/app/staticfiles"]
   manage:
     extends:
-      service: app
+      service: base
     entrypoint: ["python", "manage.py"]
+    restart: "no"
     volumes:
       - ".:/usr/src/app"
-    command: []
