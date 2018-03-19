@@ -3,3 +3,4 @@ Dockerfile
 staticfiles/
 docker-compose.yml
 .dockerignore
+bin

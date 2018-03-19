@@ -2,4 +2,4 @@
 git pull
 docker-compose build
 docker-compose stop
-./manage migrate
+bin/manage migrate
