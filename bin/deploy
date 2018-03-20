@@ -3,4 +3,4 @@ git pull
 docker-compose build
 docker-compose stop
 bin/manage migrate
-docker-compose start
+docker-compose up -d
