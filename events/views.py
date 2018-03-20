@@ -3,7 +3,11 @@ from typing import List
 from django.db.models import Q, Sum, Count, Prefetch
 from django.db.models.functions import Coalesce
 from django.views.generic import ListView, DetailView
+from rest_framework import viewsets, permissions
+
 from events.models import Event, Category, EventsParticipant
+from events.permissions import IsOwnerOrReadOnly
+from events.serializers import EventSerializer
 
 
 class EventsListView(ListView):
@@ -61,3 +65,16 @@ class CategoryDetailView(DetailView):
         ).count()
 
         return ctx
+
+
+class EventViewSet(viewsets.ModelViewSet):
+    """
+    This viewset automatically provides `list`, `create`, `retrieve`,
+    `update` and `destroy` actions.
+
+    Additionally we also provide an extra `highlight` action.
+    """
+    queryset = Event.objects.all()
+    serializer_class = EventSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,
+                          IsOwnerOrReadOnly,)

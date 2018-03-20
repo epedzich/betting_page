@@ -9,5 +9,4 @@ urlpatterns = [
     path('<int:pk>/', views.EventDetailView.as_view(), name='detail'),
     path('category/', views.CategoryListView.as_view(), name='category_list'),
     path('category/<int:pk>/', views.CategoryDetailView.as_view(), name='category_detail'),
-
 ]

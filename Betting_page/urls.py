@@ -24,6 +24,6 @@ urlpatterns = [
     path('accounts/', include('accounts.urls', namespace='accounts')),
     path('accounts/', include('django.contrib.auth.urls')),
     path('betting/', include('betting.urls', namespace='betting')),
-    path('api/', include('rest_framework.urls')),
-
+    path('api/', include('Betting_page.api_urls')),
+    path('api/auth', include('rest_framework.urls')),
 ]
