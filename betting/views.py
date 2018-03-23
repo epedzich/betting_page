@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.urls import reverse
 from django.views.generic import CreateView
+from django.views.generic.edit import ModelFormMixin
+
 from betting.models import Bet
 from events.models import EventsParticipant
 
@@ -22,7 +24,7 @@ class BetCreateView(CreateView):
             change=-bet.amount,
             bet=bet,
         )
-        return super().form_valid(form)
+        return super(ModelFormMixin, self).form_valid(form)
 
     def get_success_url(self):
         ep = EventsParticipant.objects.get(pk=self.kwargs['event_participant_id'])

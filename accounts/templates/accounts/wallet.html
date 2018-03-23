@@ -7,12 +7,14 @@
     <p><strong>List of your operations:</strong></p>
     <ul class="category-list">
         {% for op in wallet.operations.all %}
-            <li>{{ op.change }}, {{ op.date }}, for option {{ op.bet.event_participant.participant.name }}
-                in <a href="{% url 'events:detail' pk=op.bet.event_participant.event.pk %}">
-                    {{ op.bet.event_participant.event.name }}
+            {% with ep=op.bet.event_participant  %}
+            <li>{{ op.change }}, {{ op.date }}, for option {{ ep.participant.name }}
+                in <a href="{% url 'events:detail' pk=ep.event.pk %}">
+                    {{ ep.event.name }}
                 </a>
-                event {% if op.bet.event_participant.event.status != 'active' %} (finished){% endif %}
+                event {% if ep.event.status != 'active' %} (finished){% endif %}
             </li>
+            {% endwith %}
         {% endfor %}
     </ul>
 {% endblock %}

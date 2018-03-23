@@ -33,8 +33,12 @@ class EventDetailView(DetailView):
         bets_count=Count('eventsparticipant__bets')
     ).prefetch_related(
         Prefetch('eventsparticipant_set',
-                 queryset=EventsParticipant.objects.annotate(inbank=Coalesce(Sum('bets__amount'), 0),
-                                                             bets_count=Count('bets')), to_attr='options'))
+                 queryset=EventsParticipant.objects.annotate(
+                     inbank=Coalesce(Sum('bets__amount'), 0),
+                     bets_count=Count('bets')
+                 ).select_related('participant'),
+                 to_attr='options')
+    ).select_related('category__parent__parent')
 
 
 class CategoryListView(ListView):
@@ -68,12 +72,6 @@ class CategoryDetailView(DetailView):
 
 
 class EventViewSet(viewsets.ModelViewSet):
-    """
-    This viewset automatically provides `list`, `create`, `retrieve`,
-    `update` and `destroy` actions.
-
-    Additionally we also provide an extra `highlight` action.
-    """
     queryset = Event.objects.all()
     serializer_class = EventSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,
