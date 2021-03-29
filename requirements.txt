@@ -16,7 +16,7 @@ Jinja2==2.10
 Markdown==2.6.11
 MarkupSafe==1.0
 ordering==0.1.0
-Pygments==2.2.0
+Pygments==2.7.4
 pytz==2018.3
 requests==2.18.4
 six==1.11.0
